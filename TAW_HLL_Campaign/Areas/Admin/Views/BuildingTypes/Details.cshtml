@@ -1,0 +1,48 @@
+﻿@model TAW_HLL_Campaign.Models.BuildingType
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>BuildingType</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tier)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tier)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Income)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Income)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Discription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Discription)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.BuildingTypeID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
