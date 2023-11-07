@@ -34,6 +34,20 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.BuildSlots)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Team)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Team != null)
+            {
+                @Html.DisplayFor(model => model.Team.Name)
+            }
+            else
+            {
+                <span>None</span>
+            }
+        </dd>
+
     </dl>
 </div>
 <div>

@@ -24,6 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.BuildSlots)
             </th>
+            <th>
+                Team
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -42,6 +45,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BuildSlots)
             </td>
+                <td>
+                    @if (item.Team != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Team.Name)
+                    }
+                    else
+                    {
+                        <span>None</span>
+                    }
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.SectorId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.SectorId">Details</a> |

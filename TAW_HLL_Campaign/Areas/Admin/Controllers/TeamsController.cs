@@ -163,6 +163,18 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
                 {
                     _context.Stockpiles.Remove(stockpile);
                 }
+
+                // Find and update the associated sectors to set TeamID to null
+                var sectors = await _context.Sectors
+                    .Where(s => s.TeamID == id)
+                    .ToListAsync();
+
+                foreach (var sector in sectors)
+                {
+                    sector.TeamID = null;
+                    _context.Update(sector);
+                }
+
                 _context.Teams.Remove(team);
                 
             }

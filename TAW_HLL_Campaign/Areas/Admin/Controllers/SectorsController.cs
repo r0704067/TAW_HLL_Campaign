@@ -24,7 +24,7 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Sectors != null ? 
-                          View(await _context.Sectors.ToListAsync()) :
+                          View(await _context.Sectors.Include(s => s.Team).ToListAsync()) :
                           Problem("Entity set 'CampaignContext.Sectors'  is null.");
         }
 
@@ -37,6 +37,7 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
             }
 
             var sector = await _context.Sectors
+                .Include(s => s.Team)
                 .FirstOrDefaultAsync(m => m.SectorId == id);
             if (sector == null)
             {
