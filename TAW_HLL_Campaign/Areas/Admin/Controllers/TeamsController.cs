@@ -24,7 +24,7 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Teams != null ? 
-                          View(await _context.Teams.ToListAsync()) :
+                          View(await _context.Teams.Include(t => t.Stockpile).ToListAsync()) :
                           Problem("Entity set 'CampaignContext.Teams'  is null.");
         }
 
@@ -61,7 +61,15 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Create a new Stockpile
+                var stockpile = new Stockpile();
+
+                // Associate the Stockpile with the Team
+                team.Stockpile = stockpile;
+
+                // Add the Team and Stockpile to the context
                 _context.Add(team);
+                _context.Add(stockpile);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -149,7 +157,14 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
             var team = await _context.Teams.FindAsync(id);
             if (team != null)
             {
+                // Remove the associated Stockpile
+                var stockpile = team.Stockpile;
+                if (stockpile != null)
+                {
+                    _context.Stockpiles.Remove(stockpile);
+                }
                 _context.Teams.Remove(team);
+                
             }
             
             await _context.SaveChangesAsync();

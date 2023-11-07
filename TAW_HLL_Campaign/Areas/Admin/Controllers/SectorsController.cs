@@ -81,6 +81,7 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewBag.TeamID = new SelectList(_context.Teams, "TeamID", "Name", sector.TeamID);
             return View(sector);
         }
 
@@ -116,6 +117,8 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.TeamID = new SelectList(_context.Teams, "TeamID", "Name", sector.TeamID);
+
             return View(sector);
         }
 

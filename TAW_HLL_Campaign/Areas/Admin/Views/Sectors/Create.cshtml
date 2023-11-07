@@ -32,9 +32,11 @@
                 <input asp-for="BuildSlots" class="form-control" />
                 <span asp-validation-for="BuildSlots" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display: none;">
                 <label asp-for="TeamID" class="control-label"></label>
-                <select asp-for="TeamID" class ="form-control" asp-items="ViewBag.TeamID"></select>
+                <select asp-for="TeamID" class="form-control" asp-items="ViewBag.TeamID" disabled>
+                    <option value="" selected>-- None --</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -7,5 +7,6 @@
         public int VictoryPoints { get; set; }
         public int BuildSlots {  get; set; }
         public int? TeamID { get; set; }
+        public Team? Team { get; set; }
     }
 }

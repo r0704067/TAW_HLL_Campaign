@@ -15,21 +15,34 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
+            <th>
+                Total Supplies
+            </th>
+            <th>
+                Total Victory Points
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TeamID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TeamID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TeamID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stockpile.TotalSupplies)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stockpile.TotalVictoryPoints)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TeamID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TeamID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TeamID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
