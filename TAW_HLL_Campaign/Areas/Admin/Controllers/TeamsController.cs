@@ -50,7 +50,17 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
         // GET: Admin/Teams/Create
         public IActionResult Create()
         {
-            return View();
+            var teamCount = _context.Teams.Count();
+
+            if (teamCount < 2)
+            {
+                return View();
+            }
+            else
+            {
+                // Return a view or message indicating that the maximum team limit has been reached.
+                return View("MaxTeamLimitReached");
+            }
         }
 
         // POST: Admin/Teams/Create
@@ -62,8 +72,12 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Create a new Stockpile
-                var stockpile = new Stockpile();
+                var teamCount = _context.Teams.Count();
+
+                if (teamCount < 2)
+                {
+                    // Create a new Stockpile
+                    var stockpile = new Stockpile();
 
                 // Associate the Stockpile with the Team
                 team.Stockpile = stockpile;
@@ -73,6 +87,12 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
                 _context.Add(stockpile);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+                }
+            }
+            else
+            {
+                // Return a view or message indicating that the maximum team limit has been reached.
+                return View("MaxTeamLimitReached");
             }
             return View(team);
         }
