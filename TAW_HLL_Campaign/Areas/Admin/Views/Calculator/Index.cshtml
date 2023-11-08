@@ -1,0 +1,116 @@
+﻿@model TAW_HLL_Campaign.Models.ViewModels.CalculatorViewModel
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Team 1</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Team Name</th>
+                    <th>Victory Points</th>
+                    <th>Supply Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var team in Model.Teams.Take(Model.Teams.Count / 2))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => team.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => team.Stockpile.TotalVictoryPoints)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => team.Stockpile.TotalSupplies)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h2>Team 1 Sectors</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sector Name</th>
+                    <th>Team Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sector in Model.Sectors)
+                {
+                    if (sector.Team != null && sector.Team.Name == Model.Teams.First().Name)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => sector.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => sector.Team.Name)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h1>Team 2</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Team Name</th>
+                    <th>Victory Points</th>
+                    <th>Supply Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var team in Model.Teams.Skip(Model.Teams.Count / 2))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => team.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => team.Stockpile.TotalVictoryPoints)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => team.Stockpile.TotalSupplies)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h2>Team 2 Sectors</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sector Name</th>
+                    <th>Team Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sector in Model.Sectors)
+                {
+                    if (sector.Team != null && sector.Team.Name == Model.Teams.Skip(Model.Teams.Count / 2).First().Name)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => sector.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => sector.Team.Name)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <form method="post" asp-action="Generate">
+        <button type="submit" class="btn btn-primary">Generate</button>
+    </form>
+</div>
+

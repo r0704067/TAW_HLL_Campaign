@@ -37,6 +37,7 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
             }
 
             var team = await _context.Teams
+                .Include(t => t.Stockpile)
                 .FirstOrDefaultAsync(m => m.TeamID == id);
             if (team == null)
             {

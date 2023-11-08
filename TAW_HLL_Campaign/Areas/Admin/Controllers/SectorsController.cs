@@ -104,6 +104,21 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
                 {
                     _context.Update(sector);
                     await _context.SaveChangesAsync();
+
+                    // After updating the sector, update the Stockpile's VictoryPoints for the associated team
+                    var team = await _context.Teams
+                        .Include(t => t.Stockpile)
+                        .FirstOrDefaultAsync(t => t.TeamID == sector.TeamID);
+
+                    if (team != null)
+                    {
+                        team.Stockpile.TotalVictoryPoints = await _context.Sectors
+                            .Where(s => s.TeamID == team.TeamID)
+                            .SumAsync(s => s.VictoryPoints);
+
+                        _context.Update(team.Stockpile);
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
