@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TAW_HLL_Campaign.Data;
 
@@ -11,9 +12,10 @@ using TAW_HLL_Campaign.Data;
 namespace TAW_HLL_Campaign.Migrations
 {
     [DbContext(typeof(CampaignContext))]
-    partial class CampaignContextModelSnapshot : ModelSnapshot
+    [Migration("20231108134954_nationEnum")]
+    partial class nationEnum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,29 +87,6 @@ namespace TAW_HLL_Campaign.Migrations
                     b.HasKey("DefenceID");
 
                     b.ToTable("Defence", (string)null);
-                });
-
-            modelBuilder.Entity("TAW_HLL_Campaign.Models.Game", b =>
-                {
-                    b.Property<int>("GameId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GameId"), 1L, 1);
-
-                    b.Property<int>("CurrentTurn")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("GameId");
-
-                    b.ToTable("Game", (string)null);
                 });
 
             modelBuilder.Entity("TAW_HLL_Campaign.Models.Maneuver", b =>

@@ -17,6 +17,7 @@ namespace TAW_HLL_Campaign.Data
         public DbSet<Maneuver> Maneuvers { get; set; }
         public DbSet<Stockpile> Stockpiles { get; set; }
         public DbSet<Defence> Defence { get; set; }
+        public DbSet<Game> Games { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +29,7 @@ namespace TAW_HLL_Campaign.Data
             modelBuilder.Entity<Maneuver>().ToTable("Maneuver");
             modelBuilder.Entity<Stockpile>().ToTable("Stockpile");
             modelBuilder.Entity<Defence>().ToTable("Defence");
+            modelBuilder.Entity<Game>().ToTable("Game");
         }
 
 

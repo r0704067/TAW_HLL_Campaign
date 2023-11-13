@@ -33,23 +33,22 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Generate()
         {
-            var teams = _context.Teams.Include(t => t.Stockpile).ToList();
+            var teams = await _context.Teams.Include(t => t.Stockpile).ToListAsync();
 
             foreach (var team in teams)
             {
                 // Calculate the sum of supplies for the current team's sectors
-                var suppliesSum = _context.Sectors
+                var suppliesSum = await _context.Sectors
                     .Where(s => s.TeamID == team.TeamID)
-                    .Sum(s => s.SuppliesIncome);
+                    .SumAsync(s => s.SuppliesIncome);
 
                 // Add the calculated sum to the team's Stockpile.TotalSupplies
                 team.Stockpile.TotalSupplies += suppliesSum;
             }
 
-            _context.SaveChanges();
-            
+            await _context.SaveChangesAsync();
+
             return RedirectToAction("Index");
-            
         }
 
     }

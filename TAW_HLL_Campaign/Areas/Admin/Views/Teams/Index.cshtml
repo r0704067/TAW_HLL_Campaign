@@ -21,6 +21,9 @@
             <th>
                 Total Victory Points
             </th>
+            <th>
+                Nation
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -36,6 +39,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Stockpile.TotalVictoryPoints)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nation)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.TeamID">Edit</a> |

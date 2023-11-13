@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TAW_HLL_Campaign.Data;
 
@@ -11,9 +12,10 @@ using TAW_HLL_Campaign.Data;
 namespace TAW_HLL_Campaign.Migrations
 {
     [DbContext(typeof(CampaignContext))]
-    partial class CampaignContextModelSnapshot : ModelSnapshot
+    [Migration("20231108184836_game")]
+    partial class game
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

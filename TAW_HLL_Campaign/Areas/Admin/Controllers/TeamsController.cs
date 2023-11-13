@@ -68,7 +68,7 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TeamID,Name")] Team team)
+        public async Task<IActionResult> Create([Bind("TeamID,Name,Nation")] Team team)
         {
             if (ModelState.IsValid)
             {
@@ -118,7 +118,7 @@ namespace TAW_HLL_Campaign.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TeamID,Name")] Team team)
+        public async Task<IActionResult> Edit(int id, [Bind("TeamID,Name,Nation")] Team team)
         {
             if (id != team.TeamID)
             {

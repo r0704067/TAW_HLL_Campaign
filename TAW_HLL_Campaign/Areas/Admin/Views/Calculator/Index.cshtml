@@ -34,7 +34,8 @@
             <thead>
                 <tr>
                     <th>Sector Name</th>
-                    <th>Team Name</th>
+                    <th>Victory Points</th>
+                    <th>Supply Income</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,7 +48,10 @@
                                 @Html.DisplayFor(modelItem => sector.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => sector.Team.Name)
+                                @Html.DisplayFor(modelItem => sector.VictoryPoints)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => sector.SuppliesIncome)
                             </td>
                         </tr>
                     }
@@ -88,7 +92,8 @@
             <thead>
                 <tr>
                     <th>Sector Name</th>
-                    <th>Team Name</th>
+                    <th>Victory Points</th>
+                    <th>Supply Income</th>
                 </tr>
             </thead>
             <tbody>
@@ -101,7 +106,10 @@
                                 @Html.DisplayFor(modelItem => sector.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => sector.Team.Name)
+                                @Html.DisplayFor(modelItem => sector.VictoryPoints)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => sector.SuppliesIncome)
                             </td>
                         </tr>
                     }
