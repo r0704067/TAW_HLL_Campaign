@@ -4,5 +4,6 @@
     {
         public int BuildingID { get; set; }
         public int BuildingTypeID { get; set; }
+        public int? SectorID { get; set; }
     }
 }

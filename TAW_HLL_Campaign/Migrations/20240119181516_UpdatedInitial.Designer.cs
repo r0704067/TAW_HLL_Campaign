@@ -12,14 +12,14 @@ using TAW_HLL_Campaign.Data;
 namespace TAW_HLL_Campaign.Migrations
 {
     [DbContext(typeof(CampaignContext))]
-    [Migration("20231107123600_initial")]
-    partial class initial
+    [Migration("20240119181516_UpdatedInitial")]
+    partial class UpdatedInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.23")
+                .HasAnnotation("ProductVersion", "6.0.26")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -33,6 +33,9 @@ namespace TAW_HLL_Campaign.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuildingID"), 1L, 1);
 
                     b.Property<int>("BuildingTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SectorID")
                         .HasColumnType("int");
 
                     b.HasKey("BuildingID");
@@ -89,6 +92,29 @@ namespace TAW_HLL_Campaign.Migrations
                     b.ToTable("Defence", (string)null);
                 });
 
+            modelBuilder.Entity("TAW_HLL_Campaign.Models.Game", b =>
+                {
+                    b.Property<int>("GameId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GameId"), 1L, 1);
+
+                    b.Property<int>("CurrentTurn")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("GameId");
+
+                    b.ToTable("Game", (string)null);
+                });
+
             modelBuilder.Entity("TAW_HLL_Campaign.Models.Maneuver", b =>
                 {
                     b.Property<int>("maneuverId")
@@ -96,9 +122,6 @@ namespace TAW_HLL_Campaign.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("maneuverId"), 1L, 1);
-
-                    b.Property<int?>("BuildingID")
-                        .HasColumnType("int");
 
                     b.Property<int>("Cost")
                         .HasColumnType("int");
@@ -109,9 +132,6 @@ namespace TAW_HLL_Campaign.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("RoadID")
-                        .HasColumnType("int");
 
                     b.HasKey("maneuverId");
 
@@ -208,6 +228,9 @@ namespace TAW_HLL_Campaign.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Nation")
+                        .HasColumnType("int");
+
                     b.HasKey("TeamID");
 
                     b.ToTable("Team", (string)null);
@@ -215,9 +238,11 @@ namespace TAW_HLL_Campaign.Migrations
 
             modelBuilder.Entity("TAW_HLL_Campaign.Models.Sector", b =>
                 {
-                    b.HasOne("TAW_HLL_Campaign.Models.Team", null)
+                    b.HasOne("TAW_HLL_Campaign.Models.Team", "Team")
                         .WithMany("Sectors")
                         .HasForeignKey("TeamID");
+
+                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("TAW_HLL_Campaign.Models.Stockpile", b =>
@@ -233,8 +258,7 @@ namespace TAW_HLL_Campaign.Migrations
                 {
                     b.Navigation("Sectors");
 
-                    b.Navigation("Stockpile")
-                        .IsRequired();
+                    b.Navigation("Stockpile");
                 });
 #pragma warning restore 612, 618
         }

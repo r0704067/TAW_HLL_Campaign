@@ -4,23 +4,24 @@
 
 namespace TAW_HLL_Campaign.Migrations
 {
-    public partial class initial : Migration
+    public partial class UpdatedInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
+        {/*
             migrationBuilder.CreateTable(
                 name: "Building",
                 columns: table => new
                 {
                     BuildingID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BuildingTypeID = table.Column<int>(type: "int", nullable: false)
+                    BuildingTypeID = table.Column<int>(type: "int", nullable: false),
+                    SectorID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Building", x => x.BuildingID);
                 });
-
+            
             migrationBuilder.CreateTable(
                 name: "BuildingType",
                 columns: table => new
@@ -53,6 +54,21 @@ namespace TAW_HLL_Campaign.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Game",
+                columns: table => new
+                {
+                    GameId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CurrentTurn = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Game", x => x.GameId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Maneuver",
                 columns: table => new
                 {
@@ -60,9 +76,7 @@ namespace TAW_HLL_Campaign.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cost = table.Column<int>(type: "int", nullable: false),
-                    Discription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BuildingID = table.Column<int>(type: "int", nullable: true),
-                    RoadID = table.Column<int>(type: "int", nullable: true)
+                    Discription = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -90,7 +104,8 @@ namespace TAW_HLL_Campaign.Migrations
                 {
                     TeamID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nation = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -150,6 +165,7 @@ namespace TAW_HLL_Campaign.Migrations
                 table: "Stockpile",
                 column: "TeamID",
                 unique: true);
+            */
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -162,6 +178,9 @@ namespace TAW_HLL_Campaign.Migrations
 
             migrationBuilder.DropTable(
                 name: "Defence");
+
+            migrationBuilder.DropTable(
+                name: "Game");
 
             migrationBuilder.DropTable(
                 name: "Maneuver");

@@ -17,7 +17,7 @@ namespace TAW_HLL_Campaign.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.23")
+                .HasAnnotation("ProductVersion", "6.0.26")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -31,6 +31,9 @@ namespace TAW_HLL_Campaign.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuildingID"), 1L, 1);
 
                     b.Property<int>("BuildingTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SectorID")
                         .HasColumnType("int");
 
                     b.HasKey("BuildingID");
